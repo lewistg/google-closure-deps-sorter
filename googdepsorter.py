@@ -1,7 +1,10 @@
-import sys
-import subprocess
-import shlex
 import re
+import shlex
+import subprocess
+import sys
+
+class CircularDependencyException(Exception):
+    pass
 
 def buildFileDependencyGraph(filePaths):
     def getProvidedNamespaces(filePath):
@@ -52,7 +55,7 @@ def getTopologicalSort(fileDependencyGraph):
         alreadyVisiting.add(filePath)
         for requiredFilePath in fileDependencyGraph[filePath]:
             if requiredFilePath in alreadyVisiting:
-                raise Exception('Error: There is a ciruclar dependency!')
+                raise CircularDependencyException
             visit(requiredFilePath)
 
         alreadyVisiting.remove(filePath)
