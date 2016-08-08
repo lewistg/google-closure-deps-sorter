@@ -21,5 +21,13 @@ class TestDepsSorter(unittest.TestCase):
         actualOrdering = gds.getDependencyOrder(self.getTestFileList(testFileRoot))
         self.assertListEqual(expectedOrdering, actualOrdering)
 
+    def test_DagDependencyCase1(self):
+        testFileRoot = './test_files/dag_dependency_cases/case1/'
+        expectedOrdering = map(
+                lambda f: testFileRoot + f,
+                ['test3.js', 'test2.js', 'test1.js'])
+        actualOrdering = gds.getDependencyOrder(self.getTestFileList(testFileRoot))
+        self.assertListEqual(expectedOrdering, actualOrdering)
+
 if __name__ == '__main__':
     unittest.main()
