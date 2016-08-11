@@ -72,4 +72,4 @@ def getDependencyOrder(filePaths):
     return getTopologicalSort(fileDependencyGraph)
 
 if __name__ == "__main__":
-    print getDependencyOrder(sys.argv[1:])
+    print " ".join(getDependencyOrder(sys.argv[1:]))
